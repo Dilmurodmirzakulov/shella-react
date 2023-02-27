@@ -4,7 +4,7 @@ import Layout from "./layouts/Layout";
 import Cart from "./pages/Cart";
 import Category from "./pages/category/[category]";
 import Home from "./pages/Home";
-import Product from "./pages/product";
+import Product from "./pages/product/[product]";
 import store from "./store/store";
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/posts/:id" element={<Category />} />
-            <Route path="/product" element={<Product />} />
+            <Route path="/category/:category" element={<Category />} />
+            <Route path="/product/:product" element={<Product />} />
           </Routes>
         </Layout>
       </Provider>

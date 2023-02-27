@@ -11,9 +11,11 @@ export const states = {
     profileModal: false,
     favoritesModal: false,
   },
+  products: [],
   cart: [],
   favorites: [],
   prAlertShow: false,
+  groups: [],
 };
 
 const modalsReducer = (state = states.modals, action) => {
@@ -122,10 +124,29 @@ const favoritesReducer = (state = states.favorites, action) => {
   }
 };
 
+const productsReducer = (state = states.products, action) => {
+  switch (action.type) {
+    case "FETCH_PRODUCTS":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+const groupsReducer = (state = states.groups, action) => {
+  switch (action.type) {
+    case "FETCH_GROUPS":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const reducers = combineReducers({
   cartReducer,
   modalsReducer,
   favoritesReducer,
+  productsReducer,
+  groupsReducer,
 });
 
 export default configureStore({

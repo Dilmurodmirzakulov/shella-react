@@ -85,19 +85,32 @@ export const closeFavorites = () => {
 };
 
 export const addToFavorites = (id) => {
-  return{
+  return {
     type: "ADD_TO_FAVORITES",
-    payload: id
-  }
-}
+    payload: id,
+  };
+};
 export const removeFromFavorites = (id) => {
-  return{
+  return {
     type: "REMOVE_FROM_FAVORITES",
-    payload: id
-  }
-}
+    payload: id,
+  };
+};
 export const removePrAlert = () => {
   return {
     type: "REMOVE_PR_ALERT",
-  }
-}
+  };
+};
+
+export const fetchProducts = (arr) => {
+  return {
+    type: "FETCH_PRODUCTS",
+    payload: arr,
+  };
+};
+export const fetchGroups = (arr) => {
+  return {
+    type: "FETCH_GROUPS",
+    payload: arr,
+  };
+};

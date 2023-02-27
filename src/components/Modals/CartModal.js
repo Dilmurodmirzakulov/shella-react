@@ -9,7 +9,9 @@ function CartModal() {
 
   const dispatch = useDispatch();
   const show = useSelector((state) => state.modalsReducer.cartModal);
+  const cart = useSelector((state) => state.cartReducer);
 
+  console.log("cart", cart)
   return (
     <>
       <Modal

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -15,8 +15,16 @@ import {
   CiHeart,
   CiShoppingCart,
 } from "react-icons/ci";
+import axios from "axios";
 
 function Header() {
+  const [groupsArr, setGroupsArr] = useState();
+  useEffect(() => {
+    axios
+      .get("http://142.93.237.244:9090/v1/groups-by-filter?enabled=true")
+      .then((response) => setGroupsArr(response.data))
+      .catch((error) => console.log(error));
+  }, []);
   const dispatch = useDispatch();
   return (
     <div>
@@ -103,34 +111,22 @@ function Header() {
         <nav className="bg-gray cat-wrapper">
           <div className="container">
             <div className="cat-list d-flex">
-              <div className="category-item category-has-children dm-child-center">
-                <Link
-                  to={`/posts/example`}
-                  className="category-item category-has-children dm-child-center"
-                >
-                  <span className="text-uppercase">Makeup</span>
-                </Link>
-              </div>
-              <div className="category-item dm-child-center">
-                <a href="#" className="px-3 d-flex align-items-center">
-                  <span className="text-uppercase">Skin Care</span>
-                </a>
-              </div>
-              <div className="category-item dm-child-center">
-                <a href="#" className="px-3 d-flex align-items-center">
-                  <span className="text-uppercase">Hair Care</span>
-                </a>
-              </div>
-              <div className="category-item dm-child-center">
-                <a href="#" className="px-3 d-flex align-items-center">
-                  <span className="text-uppercase">Makeup</span>
-                </a>
-              </div>
-              <div className="category-item dm-child-center">
-                <a href="#" className="px-3 d-flex align-items-center">
-                  <span className="text-uppercase">Makeup</span>
-                </a>
-              </div>
+              {groupsArr &&
+                groupsArr.map((group) => {
+                  return (
+                    <div
+                      className="category-item category-has-children dm-child-center"
+                      key={"nav-category" + group.nameUz}
+                    >
+                      <Link
+                        to={`/category/${group.url}`}
+                        className="category-item category-has-children dm-child-center px-3"
+                      >
+                        <span className="text-uppercase">{group.nameUz}</span>
+                      </Link>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </nav>
